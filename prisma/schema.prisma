@@ -23,7 +23,7 @@ model Post {
   authorId Int
   text     String
 
-  author   User          @relation(fields: [authorId], references: [id])
+  author   User          @relation(fields: [authorId], references: [id], onDelete: Cascade)
   likes    PostLike[]
   comments PostComment[]
   images   PostImage[]
@@ -35,8 +35,8 @@ model PostComment {
   postId   Int
   text     String
 
-  author User @relation(fields: [authorId], references: [id])
-  post   Post @relation(fields: [postId], references: [id])
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 }
 
 model PostLike {
@@ -44,8 +44,8 @@ model PostLike {
   authorId Int
   postId   Int
 
-  author User @relation(fields: [authorId], references: [id])
-  post   Post @relation(fields: [postId], references: [id])
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   @@unique([authorId, postId])
 }
@@ -56,5 +56,5 @@ model PostImage {
   url    String
   alt    String
 
-  post Post @relation(fields: [postId], references: [id])
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 }

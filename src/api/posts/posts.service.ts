@@ -13,12 +13,15 @@ export class PostsService {
   }
 
   async findAll(): Promise<Post[]> {
-    return await this.databaseService.post.findMany();
+    return await this.databaseService.post.findMany({
+      include: { author: true, comments: true, images: true, likes: true },
+    });
   }
 
   async findOne(id: number): Promise<Post | null> {
     return await this.databaseService.post.findUnique({
       where: { id },
+      include: { author: true, comments: true, images: true, likes: true },
     });
   }
 
