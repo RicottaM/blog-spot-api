@@ -16,7 +16,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async authenticate(input: AuthInput) {
+  async authenticate(input: AuthInput): Promise<AuthResult> {
     const user = await this.validateUser(input);
 
     if (!user) {
@@ -66,7 +66,7 @@ export class AuthService {
     return this.signIn({ userId: user.id, login: user.login });
   }
 
-  async checkUserUnique(login: string, email: string) {
+  async checkUserUnique(login: string, email: string): Promise<void> {
     if (await this.userService.findByLogin(login)) {
       throw new ConflictException('Login already taken');
     }

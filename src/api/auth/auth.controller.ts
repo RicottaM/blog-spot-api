@@ -22,7 +22,13 @@ export class AuthController {
 
   @HttpCode(HttpStatus.OK)
   @Post('login')
-  async login(@Body() input: AuthInput, @Response() response) {
+  async login(
+    @Body() input: AuthInput,
+    @Response() response,
+  ): Promise<{
+    userId: number;
+    login: string;
+  }> {
     const { accessToken, userId, login } =
       await this.authService.authenticate(input);
 
