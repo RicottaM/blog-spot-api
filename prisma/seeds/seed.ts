@@ -41,7 +41,7 @@ async function main() {
     const post = await prisma.post.create({
       data: {
         text: postText,
-        authorId: 1,
+        authorId: admin.id,
       },
     });
 
@@ -50,7 +50,7 @@ async function main() {
 }
 
 main()
-  .catch(async (error) => {
+  .catch((error) => {
     console.error(`[ERROR]: ${error.message}`);
   })
   .finally(async () => {
